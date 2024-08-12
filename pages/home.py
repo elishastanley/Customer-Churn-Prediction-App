@@ -8,7 +8,7 @@ def show():
     col1, col2 = st.columns([3, 1])
 
     with col1:
-        st.image("Static/images/churn.png", width=800)  # Adjust the width to fit the content appropriately
+        st.image("Static/images/churn.png", width=800)  
         st.header("📘 About the Application")
         st.write(
             """

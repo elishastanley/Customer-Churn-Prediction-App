@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import pickle
 
-# Theme of the app
 st.set_page_config(
     page_title="Churn Prediction App",
     page_icon="📈",
@@ -11,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Loading your model and preprocessing tools
+# Loading the model and preprocessing tools
 with open('Models/churn_model_components.pkl', 'rb') as file:
     components = pickle.load(file)
 
