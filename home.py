@@ -9,7 +9,7 @@ def show():
 
     with col1:
         st.image("Static/images/churn.png", width=800)  
-        st.header("📘 About the Application")
+        st.header("About the Application")
         st.write(
             """
             This application is designed to predict customer churn using machine learning techniques. 
@@ -51,3 +51,4 @@ def show():
 
 if __name__ == "__main__":
     show()
+

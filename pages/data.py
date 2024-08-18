@@ -20,7 +20,8 @@ connection_string = f"DRIVER={{SQL Server}};SERVER={server};DATABASE={database};
 def get_connection():
     return pyodbc.connect(connection_string)
 
-# Function to load data from SQL Server
+# Using the new st.cache_data decorator to cache the data loaded from the database
+@st.cache_data
 def load_data():
     with get_connection() as conn:
         return pd.read_sql_query("SELECT * FROM dbo.LP2_Telco_churn_first_3000", conn)
