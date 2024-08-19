@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pyodbc
 import numpy as np
-from dotenv import dotenv_values
+from dotenv import dotenv_valuesz
 
 # Loading environment variables from .env file
 environment_variables = dotenv_values('.env')
