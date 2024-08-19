@@ -17,7 +17,7 @@ with open('Models/churn_model_components.pkl', 'rb') as file:
 preprocessor = components['preprocessing']['preprocessor']
 models = components['tuned_models']
 
-def predict(attributes):
+def predict(attributes, model_name):
     df = pd.DataFrame([attributes], columns=[
         'gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure', 'PhoneService', 
         'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 
@@ -25,13 +25,21 @@ def predict(attributes):
         'Contract', 'PaperlessBilling', 'PaymentMethod', 'MonthlyCharges', 'TotalCharges'
     ])
     processed_df = preprocessor.transform(df)
-    pred = models['random_forest'].predict(processed_df)
-    prob = models['random_forest'].predict_proba(processed_df)
+    
+    # Select the model based on user choice
+    model = models.get(model_name)
+    if model is None:
+        return None, 0
+    
+    pred = model.predict(processed_df)
+    prob = model.predict_proba(processed_df)
     return pred[0], np.max(prob)
 
 st.title('Customer Churn Prediction Tool')
 st.markdown("### Please input the required fields to predict customer churn")
 
+# Model selection
+model_name = st.selectbox('Select Model', ['random_forest', 'lightgbm'])
 
 cols1 = st.columns(3)
 cols2 = st.columns(3)
@@ -81,7 +89,6 @@ with cols3[1]:
 with cols3[2]:
     tenure = st.number_input('Tenure (in months)', min_value=0, max_value=100, value=1)
 
-
 user_input = {
     'gender': gender, 'SeniorCitizen': 'Yes' if senior_citizen == 'Yes' else 'No', 'Partner': partner, 'Dependents': dependents,
     'tenure': tenure, 'PhoneService': phone_service, 'MultipleLines': multiple_lines,
@@ -93,7 +100,9 @@ user_input = {
 
 # Prediction 
 if st.button('Predict Churn'):
-    prediction, probability = predict(user_input)
-    st.success(f'Prediction: {"Churn" if prediction == 1 else "No Churn"} with Probability: {probability:.2f}')
-
-
+    prediction, probability = predict(user_input, model_name)
+    if prediction is not None:
+        st.write(f"Prediction: {'Churn' if prediction == 1 else 'Not Churn'}")
+        st.write(f"Probability: {probability:.2f}")
+    else:
+        st.write("Model not found.")
