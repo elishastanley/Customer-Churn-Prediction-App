@@ -1,4 +1,4 @@
-version: '3'
+version: '3'  # You can keep this line, although it's optional in the latest Docker Compose versions
 services:
   app:
     build: .
@@ -6,3 +6,4 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+    command: streamlit run home.py --server.port 5000 --server.headless true
