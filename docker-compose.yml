@@ -6,4 +6,4 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
-    command: streamlit run home.py --server.port 5000 --server.headless true
+    command: streamlit run home🏠.py --server.port 5000 --server.headless true
