@@ -129,13 +129,13 @@ user_input = {
 
 # Prediction
 if st.button('Predict Churn'):
-    prediction, probability, used_model = predict(
-        user_input, model_name)  # Unpack all three returned values
+    prediction, probability, used_model = predict(user_input, model_name)  
     if prediction is not None:
-        st.write(f"Prediction: {prediction}")
-        st.write(f"Probability: {probability:.2f}")
-        st.write(f"Model Used: {used_model}")
+        message = f"Prediction: {prediction}\nProbability: {
+            probability:.2f}\nModel Used: {used_model}"
+        st.success(message)
+
         save_to_prediction_history(
             user_input, prediction, probability, used_model)
     else:
-        st.write("Model not found.")
+        st.error("Model not found.")  # Show an error if the model is not found

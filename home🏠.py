@@ -8,8 +8,6 @@ st.set_page_config(
 )
 
 def show():
-    st.set_page_config(page_title="Customer Retention Analyzer",
-                       page_icon="", layout="wide")
     st.title("Welcome to the Customer Retention Analyzer")
 
     container = st.container()
