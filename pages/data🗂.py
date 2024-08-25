@@ -4,6 +4,13 @@ import pyodbc
 import numpy as np
 from dotenv import dotenv_values
 
+st.set_page_config(
+    page_title="Sample Data",
+    page_icon="🗂",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # Loading environment variables from .env file
 environment_variables = dotenv_values('.env')
 

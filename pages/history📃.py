@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="Prediction History",
     page_icon="📃",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 def show_history_page():

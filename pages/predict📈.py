@@ -5,10 +5,10 @@ from model import load_model_components
 from database import save_to_customer_data, save_to_prediction_history
 
 st.set_page_config(
-    page_title="Churn Prediction App",
+    page_title="Churn Prediction",
     page_icon="📈",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Loading the model and preprocessing tools
