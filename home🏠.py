@@ -2,61 +2,63 @@ import streamlit as st
 
 
 def show():
-    st.set_page_config(page_title="Churn Prediction App",
+    st.set_page_config(page_title="Customer Retention Analyzer",
                        page_icon="", layout="wide")
-    st.title("Welcome to the Churn Prediction Application")
+    st.title("Welcome to the Customer Retention Analyzer")
 
-    # Using a single container to manage all content more compactly
     container = st.container()
     col1, col2 = container.columns([5, 1])
 
-    #st.image("Static/images/churn.png", width=400)
+    # Documentation and Details about the Application
+    with col1:
+        # Display the churn image
+        st.image("Static/images/churn.png",
+                 caption="Understanding Customer Churn", width=700)
 
-    with col1:    
-
-        with st.expander("### About the Application", expanded=True):
-            st.markdown("#### About the Application")
+        with st.expander("### About the Application", expanded=False):
+            st.markdown("#### Customer Retention Analyzer")
             st.write("""
-                This application predicts customer churn using machine learning. It helps businesses improve retention strategies by providing insights into customer behavior.
+                The Customer Retention Analyzer is designed to predict whether a customer is likely to leave the service based on a variety of factors. This tool aids companies in implementing proactive retention strategies.
             """)
 
-            st.markdown("#### Introduction")
+            st.markdown("#### Key Features")
             st.write("""
-                Understanding customer churn allows businesses to develop strategies to increase retention.
+                - **View Data**: Accessed data in a remote database via connection.
+                - **Dashboard**: Contains data visualizations to explore trends.
+                - **Predict**: Make real-time predictions with machine learning models.
             """)
 
-
-            st.markdown("#### Problem Statement and Goals")
+            st.markdown("#### User Benefits")
             st.write("""
-                The goal is to reduce customer churn by identifying at-risk customers and suggesting effective strategies.
+                - Make data-driven decisions effortlessly.
+                - Harness the power of machine learning without the complexity.
+                - Save and analyze your data securely.
             """)
 
-            st.markdown("#### Data Understanding")
+            st.markdown("#### Machine Learning Integration")
             st.write("""
-                Utilizes data to predict churn based on attributes like gender, service usage, and billing methods.
+                The application allows you to select between multiple predictive models, providing flexibility and accuracy in forecasts.
             """)
 
-            st.markdown("#### Hypotheses Testing")
+            st.markdown("#### Documentation")
             st.write("""
-                Tests hypotheses on factors impacting churn, like differences in monthly charges.
+                This section documents the app's features, benefits, and machine learning integration, serving as a guide for users and developers alike.
             """)
-
-            
 
     with col2:
-        
         st.markdown("#### 🔗 Quick Links")
         st.write("""
             - [GitHub Repository](https://github.com/elishastanley/Churn-Prediction-Enhancing-Retention-with-Machine-Learning)
-            - [LinkedIn Profile](https://www.linkedin.com/in/elishastanley)
-            - [Read on Medium](https://medium.com/@elishastanley)
+            - [LinkedIn Profile](https://www.linkedin.com/in/elisha-stanley/)
+            - [Read on Medium](https://medium.com/@elishastanley255)
         """)
 
         st.markdown("##### 🤝 Connect with Me")
         st.write("""
             - [GitHub](https://github.com/elishastanley)
-            - [LinkedIn](https://www.linkedin.com/in/elishastanley)
-            - [Medium](https://medium.com/@elishastanley)
+            - [LinkedIn](https://www.linkedin.com/in/elisha-stanley/)
+            - [Medium](https://medium.com/@elishastanley255)
+            - Contact me at [Email](mailto:elishastanley255@gmail.com)
         """)
 
 
