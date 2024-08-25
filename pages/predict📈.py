@@ -28,11 +28,14 @@ def predict(attributes, model_name):
     # Select the model based on user choice
     model = models.get(model_name)
     if model is None:
-        return None, 0
+        return None, 0, model_name
 
     pred = model.predict(processed_df)
     prob = model.predict_proba(processed_df)
-    return pred[0], np.max(prob)
+    # Convert binary label to Yes/No
+    pred_label = "Yes" if pred[0] == 1 else "No"
+    return pred_label, np.max(prob), model_name
+
 
 
 def save_to_history(user_input, prediction, probability):
@@ -126,12 +129,13 @@ user_input = {
 
 # Prediction
 if st.button('Predict Churn'):
-    prediction, probability = predict(user_input, model_name)
+    prediction, probability, used_model = predict(
+        user_input, model_name)  # Unpack all three returned values
     if prediction is not None:
-        st.write(f"Prediction: {'Churn' if prediction == 1 else 'Not Churn'}")
+        st.write(f"Prediction: {prediction}")
         st.write(f"Probability: {probability:.2f}")
-        # Save customer data and prediction history to the database
-        save_to_customer_data(user_input)
-        save_to_prediction_history(user_input, prediction, probability)
+        st.write(f"Model Used: {used_model}")
+        save_to_prediction_history(
+            user_input, prediction, probability, used_model)
     else:
         st.write("Model not found.")

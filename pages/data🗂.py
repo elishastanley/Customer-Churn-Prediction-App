@@ -14,7 +14,7 @@ username = environment_variables.get("USERNAME")
 password = environment_variables.get("PASSWORD")
 
 # Creating a connection string for SQL Server
-connection_string = f"DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password};"
+connection_string = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password};"
 
 # Establishing a database connection using pyodbc
 def get_connection():
