@@ -4,11 +4,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import sqlite3
 
-# Setting up the page
+
 st.set_page_config(page_title="Data Dashboard", page_icon="📊",
                    layout="wide", initial_sidebar_state="expanded")
 
-# Load data from the SQLite database
+
 @st.cache_resource
 def load_data():
     """Loading data from the SQLite database."""
@@ -26,7 +26,7 @@ def load_data():
 
 df = load_data()
 
-# Convert 'gender' from categorical to numeric if it exists
+
 if 'gender' in df.columns:
     df['gender'] = df['gender'].map({'Male': 0, 'Female': 1}).fillna(-1)
 
@@ -34,7 +34,7 @@ numeric_df = df.select_dtypes(include=['float64', 'int64'])
 
 st.title('Comprehensive Data Dashboard')
 
-# Analytics Dashboard
+
 st.header("Analytics Dashboard")
 kpi1, kpi2, kpi3 = st.columns(3)
 with kpi1:
@@ -50,7 +50,7 @@ with kpi3:
     average_tenure = df['tenure'].mean() if 'tenure' in df.columns else 0
     st.metric("Average Customer Tenure", f"{average_tenure:.1f} months")
 
-# Exploratory Data Analysis Section
+
 st.header("Exploratory Data Analysis")
 col1, col2, col3 = st.columns(3)
 with col1:

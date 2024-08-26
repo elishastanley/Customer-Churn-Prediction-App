@@ -131,8 +131,7 @@ user_input = {
 if st.button('Predict Churn'):
     prediction, probability, used_model = predict(user_input, model_name)  
     if prediction is not None:
-        message = f"Prediction: {prediction}\nProbability: {
-            probability:.2f}\nModel Used: {used_model}"
+        message = f"Prediction: {prediction}\nProbability: {probability:.2f}\nModel Used: {used_model}"
         st.success(message)
 
         save_to_prediction_history(

@@ -9,4 +9,5 @@ pytest
 joblib==1.4.2
 pyodbc
 lightgbm
-
+seaborn
+python-dotenv 
