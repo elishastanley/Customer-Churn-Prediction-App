@@ -4,6 +4,7 @@ from data import show as show_data
 from dashboard import show as show_dashboard
 from predict import show as show_prediction
 from history import show as show_history
+from database import authenticate
 
 # Set Streamlit page configuration
 st.set_page_config(
@@ -13,21 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Simulated user database
-users = {
-    "admin": "admin123",
-    "user": "user123"
-}
-
-# Authentication
-
-
-def authenticate(username, password):
-    return users.get(username) == password
-
 # Main app logic
-
-
 def main():
     if 'login_status' not in st.session_state:
         st.session_state['login_status'] = False
