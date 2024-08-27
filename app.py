@@ -5,6 +5,14 @@ from dashboard import show as show_dashboard
 from predict import show as show_prediction
 from history import show as show_history
 
+# Set Streamlit page configuration
+st.set_page_config(
+    page_title="Churn App",
+    page_icon="",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # Simulated user database
 users = {
     "admin": "admin123",
