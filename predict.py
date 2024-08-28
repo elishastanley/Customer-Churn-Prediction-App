@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def show():
-    st.title('Prediction Page')
-    st.write("Welcome to the Prediction Page!")
+    st.title('History Page')
+    st.write("Welcome to the History Page!")
