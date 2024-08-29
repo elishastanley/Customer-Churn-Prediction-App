@@ -26,3 +26,17 @@ def authenticate(username, password):
         if bcrypt.checkpw(password, db_password):
             return True
     return False
+
+def save_prediction(data, predictions):
+    conn = get_connection()
+    cursor = conn.cursor()
+    for model, probability in predictions.items():
+        cursor.execute("""
+            INSERT INTO customer_data (gender, SeniorCitizen, Partner, Dependents, tenure, PhoneService,
+                                       MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection,
+                                       TechSupport, StreamingTV, StreamingMovies, Contract, PaperlessBilling,
+                                       PaymentMethod, MonthlyCharges, TotalCharges, Prediction, Probability, ModelUsed)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (*data.values(), 'Yes' if probability > 0.5 else 'No', probability, model))
+    conn.commit()
+    conn.close()

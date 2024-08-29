@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import base64  # Correctly import the base64 module here
-from database import get_connection
+import base64  
+from database import save_prediction
 
 # Load models and preprocessing pipeline
 model_path = 'Models/churn_model_components.pkl'
@@ -11,26 +11,9 @@ preprocessor = loaded_components['preprocessing']['preprocessor']
 tuned_models = loaded_components['tuned_models']
 
 def predict_single(customer_data):
-    # Process the input data through the preprocessor
     processed_data = preprocessor.transform(pd.DataFrame([customer_data]))
-    # Predict using the loaded models
     predictions = {name: model.predict_proba(processed_data)[:, 1][0] for name, model in tuned_models.items()}
     return predictions
-
-def save_prediction(data, predictions):
-    conn = get_connection()
-    cursor = conn.cursor()
-    # Save each prediction with model details to the database
-    for model, probability in predictions.items():
-        cursor.execute("""
-            INSERT INTO customer_data (gender, SeniorCitizen, Partner, Dependents, tenure, PhoneService,
-                                       MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection,
-                                       TechSupport, StreamingTV, StreamingMovies, Contract, PaperlessBilling,
-                                       PaymentMethod, MonthlyCharges, TotalCharges, Prediction, Probability, ModelUsed)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (*data.values(), 'Yes' if probability > 0.5 else 'No', probability, model))
-    conn.commit()
-    conn.close()
 
 def download_link(df):
     """Generate a download link for a DataFrame in CSV format."""
