@@ -53,7 +53,7 @@ def main():
                     if authenticate(username, password):
                         st.session_state['login_status'] = True
                         st.session_state['username'] = username
-                        st.experimental_rerun()
+                        st.rerun()
                     else:
                         st.error("Incorrect Username/Password")
 
