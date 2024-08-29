@@ -24,19 +24,8 @@ def main():
             st.session_state['login_status'] = False
             st.sidebar.success("You have been logged out.")
             st.rerun()
-    else:
-        st.sidebar.title("Login")
-        username = st.sidebar.text_input("Username")
-        password = st.sidebar.text_input("Password", type="password")
-        if st.sidebar.button("Login"):
-            if authenticate(username, password):
-                st.session_state['login_status'] = True
-                st.session_state['username'] = username
-                st.rerun()
-            else:
-                st.sidebar.error("Incorrect Username/Password")
 
-    if st.session_state.get('login_status'):
+        # User is logged in, show sidebar menu
         st.sidebar.success(f"Logged in as {st.session_state['username']}")
         page = st.sidebar.radio(
             "Go to", ('Home', 'Data', 'Dashboard', 'Prediction', 'History'))
@@ -50,9 +39,34 @@ def main():
             show_prediction()
         elif page == 'History':
             show_history()
-    else:
-        st.info("Please login to access the application")
 
+    else:
+        # User is not logged in, show login form
+        with st.sidebar:
+            st.title("Login")
+            with st.form(key='login_form'):
+                username = st.text_input("Username")
+                password = st.text_input("Password", type="password")
+                submit_button = st.form_submit_button(label='Login')
+
+                if submit_button:
+                    if authenticate(username, password):
+                        st.session_state['login_status'] = True
+                        st.session_state['username'] = username
+                        st.experimental_rerun()
+                    else:
+                        st.error("Incorrect Username/Password")
+
+        # Show login prompt in the main are
+        st.markdown("""
+                <h2 style='text-align: center;'>CHURN MANAGEMENT APPLICATION</h2>
+                """, unsafe_allow_html=True)
+        container = st.container()
+        col1, col2, col3 = container.columns([1, 5, 1])
+
+        with col2:
+            st.image("images/churn05.png", width=850)
+            st.info("Please login to access the application")
 
 if __name__ == "__main__":
     main()
