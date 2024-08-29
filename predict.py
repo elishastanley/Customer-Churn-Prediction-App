@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import base64  # Correctly import the base64 module here
 from database import get_connection
 
 # Load models and preprocessing pipeline
@@ -30,6 +31,13 @@ def save_prediction(data, predictions):
         """, (*data.values(), 'Yes' if probability > 0.5 else 'No', probability, model))
     conn.commit()
     conn.close()
+
+def download_link(df):
+    """Generate a download link for a DataFrame in CSV format."""
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="enhanced_data.csv">Download enhanced data</a>'
+    return href
 
 def show():
     st.title('Customer Churn Prediction')
@@ -82,23 +90,27 @@ def show():
             for model, prob in predictions.items():
                 st.write(f"{model}: {'Churn' if prob > 0.5 else 'Not Churn'} with probability {prob:.2f}")
 
+    
     st.header("Bulk Prediction")
     uploaded_file = st.file_uploader("Upload CSV", type='csv')
     if uploaded_file is not None:
         data_to_predict = pd.read_csv(uploaded_file)
         processed_data = preprocessor.transform(data_to_predict)
         
-        cols = st.columns(len(tuned_models))  # Create a column for each model
-        for i, (name, model) in enumerate(tuned_models.items()):
+        results_data = data_to_predict.copy()  # Copy the original data
+
+        for name, model in tuned_models.items():
             predictions = model.predict_proba(processed_data)[:, 1]
-            churn_decision = ['Yes' if x > 0.5 else 'No' for x in predictions]
-            with cols[i]:  # Display each model's predictions in its own column
-                st.write(f"{name} Predictions")
-                results_df = pd.DataFrame({
-                    "Probability": predictions,
-                    "Prediction": churn_decision
-                })
-                st.dataframe(results_df)
+            results_data[f'{name}_Probability'] = predictions
+            results_data[f'{name}_Prediction'] = ['Yes' if x > 0.5 else 'No' for x in predictions]
+
+        st.write("Consolidated Results:")
+        st.dataframe(results_data)
+
+        # Download link
+        if st.button("Download Enhanced Dataset"):
+            tmp_download_link = download_link(results_data)
+            st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     show()
