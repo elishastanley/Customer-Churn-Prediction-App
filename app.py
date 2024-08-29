@@ -9,7 +9,7 @@ from database import authenticate
 # Set Streamlit page configuration
 st.set_page_config(
     page_title="Churn App",
-    page_icon="",
+    page_icon="images/churn01.png",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -26,7 +26,7 @@ def main():
             st.rerun()
 
         # User is logged in, show sidebar menu
-        st.sidebar.success(f"Logged in as {st.session_state['username']}")
+        st.sidebar.header(f"Logged in as {st.session_state['username']}")
         page = st.sidebar.radio(
             "Go to", ('Home', 'Data', 'Dashboard', 'Prediction', 'History'))
         if page == 'Home':
@@ -65,8 +65,7 @@ def main():
         col1, col2, col3 = container.columns([1, 5, 1])
 
         with col2:
-            st.image("images/churn05.png", width=850)
-            st.info("Please login to access the application")
+            st.image("images/churn05.png", use_column_width="always")
 
 if __name__ == "__main__":
     main()

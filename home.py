@@ -38,6 +38,8 @@ def show():
                 - [Source Code](https://github.com/elishastanley/Customer-Churn-Prediction-App)
                 - [Model Training](https://github.com/elishastanley/Churn-Prediction-Enhancing-Retention-with-Machine-Learning)
             """)
+        
+        st.image("images/churn05.png", use_column_width="always")
 
     with col2:
         st.markdown("#### 🔗 Quick Links")
