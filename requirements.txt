@@ -13,3 +13,4 @@ seaborn
 python-dotenv
 bcrypt 
 plotly>=5.0
+faker 

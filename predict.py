@@ -35,7 +35,6 @@ def show():
     st.title('Customer Churn Prediction')
     
     with st.form("prediction_form"):
-        # Using expanders to categorize form inputs
         with st.expander("Basic Information"):
             col1, col2 = st.columns(2)
             with col1:
@@ -88,12 +87,18 @@ def show():
     if uploaded_file is not None:
         data_to_predict = pd.read_csv(uploaded_file)
         processed_data = preprocessor.transform(data_to_predict)
-        bulk_predictions = {name: model.predict_proba(processed_data)[:, 1] for name, model in tuned_models.items()}
-        st.write("Bulk prediction results:")
-        for model, probs in bulk_predictions.items():
-            st.write(f"{model} predictions:")
-            st.write(probs)
-        # Optionally save or provide download link for the predictions
+        
+        cols = st.columns(len(tuned_models))  # Create a column for each model
+        for i, (name, model) in enumerate(tuned_models.items()):
+            predictions = model.predict_proba(processed_data)[:, 1]
+            churn_decision = ['Yes' if x > 0.5 else 'No' for x in predictions]
+            with cols[i]:  # Display each model's predictions in its own column
+                st.write(f"{name} Predictions")
+                results_df = pd.DataFrame({
+                    "Probability": predictions,
+                    "Prediction": churn_decision
+                })
+                st.dataframe(results_df)
 
 if __name__ == "__main__":
     show()
