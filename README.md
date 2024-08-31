@@ -29,13 +29,26 @@ Build and run the application using Docker Compose:
 docker-compose build
 docker-compose up
 ```
-After executing these commands, the application will be accessible at `http://localhost:8501` or another port specified in your `docker-compose.yml` file.
 
-In the Markdown text:
+## Configuration
+Configuration settings can be adjusted in the `Dockerfile` or the `.streamlit/config.toml` file for application-specific settings like themes. For Docker-specific settings, modify the `docker-compose.yml` and `.env` files.
 
-- **Headers** are created using `#` for different levels of heading. For example, `#` for `h1`, `##` for `h2`, and so on.
-- **Bold Text:** Text is made bold using `**`, suitable for emphasizing titles like section names.
-- **Lists:** Bullet lists are made using `-` or `*` at the start of a line.
-- **Code Blocks:** Inline code is wrapped in single backticks (`), and blocks of code are wrapped in triple backticks (```) with an optional language identifier for syntax highlighting (e.g., ```bash for Bash shell scripts).
+## Usage
+Navigate to [http://localhost:8501](http://localhost:8501) in your web browser to access the application. Use the application as described in the Usage section.
 
-This Markdown file should provide a clear, organized description of your application, making it easy for users to understand its purpose, features, and how to get it running.
+## Docker Compose Details
+- **Dockerfile**: Defines the Docker container specifics, such as base image, necessary environment setup, and commands.
+- **docker-compose.yml**: Configures the services involved in the application, which might include databases, backend services, and the Streamlit app itself.
+
+## Contributing
+Contributions are welcome! Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more details on how to submit pull requests, bug reports, and feature requests.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## Acknowledgments
+- Thanks to the Streamlit team for providing an excellent tool for building interactive data apps.
+- Acknowledge any data providers or key contributors.
+
+## Contact
+For support or queries, reach out to [contact@email.com](mailto:elishastanley255@gmail.com).
