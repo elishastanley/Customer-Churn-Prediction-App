@@ -40,15 +40,8 @@ Navigate to [http://localhost:8501](http://localhost:8501) in your web browser t
 - **Dockerfile**: Defines the Docker container specifics, such as base image, necessary environment setup, and commands.
 - **docker-compose.yml**: Configures the services involved in the application, which might include databases, backend services, and the Streamlit app itself.
 
-## Contributing
-Contributions are welcome! Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more details on how to submit pull requests, bug reports, and feature requests.
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-## Acknowledgments
-- Thanks to the Streamlit team for providing an excellent tool for building interactive data apps.
-- Acknowledge any data providers or key contributors.
 
 ## Contact
 For support or queries, reach out to [contact@email.com](mailto:elishastanley255@gmail.com).
