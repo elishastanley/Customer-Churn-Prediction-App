@@ -1,5 +1,7 @@
 # Churn Management Application
 
+![Churn App](images/churn05.png)
+
 ## Description
 This Streamlit application is designed to help businesses understand and predict customer churn using machine learning models. It is containerized using Docker for easy deployment and scaling.
 
